@@ -1,0 +1,59 @@
+{
+    "status": "SUCCESS",
+    "result": "0",
+    "lists": [
+        {
+            "name": "发布时间",
+            "type": "datepicker",
+            "time":[
+                {"type":"startTime","value": "2016.04.10"},
+                {"type":"endTime","value": "2017.07.01"}
+            ]
+        },
+        {
+            "name": "创建型",
+            "type": "list",
+            "sub": [
+                {"type": "unlimited", "value": "不限"}, 
+                {"type": "Singleton", "value": "单例模式"},
+                {"type": "Prototype", "value": "原型模式"},
+                {"type": "FactoryMethod", "value": "工厂方法模式"},
+                {"type": "AbstractFactory", "value": "抽象工厂模式"},
+                {"type": "Builder", "value": "建造者模式"}
+            ]
+        },
+        {
+            "name": "结构型",
+            "type": "list",
+            "sub": [
+                {"type": "unlimited", "value": "不限"}, 
+                {"type": "Adapter", "value": "适配器模式"}, 
+                {"type": "Bridge", "value": "桥接模式"},
+                {"type": "Composite", "value": "组合模式"},
+                {"type": "Decorator", "value": "装饰者模式"},
+                {"type": "Façade", "value": "外观模式"},
+                {"type": "Flyweight", "value": "享元模式"},
+                {"type": "Proxy", "value": "代理模式"}
+            ]
+        },
+        {
+            "name": "行为型",
+            "type": "list",
+            "sub": [
+                {"type": "unlimited", "value": "不限"}, 
+                {"type": "ChainofResponsibility", "value": "职责链模式"},
+                {"type": "Command", "value": "命令模式"},
+                {"type": "Interpreter", "value": "解释器模式"},
+                {"type": "Iterator", "value": "迭代器模式"},
+                {"type": "Mediator", "value": "中介者模式"},
+                {"type": "Memento", "value": "备忘录模式"},
+                {"type": "Observer", "value": "观察者模式"},
+                {"type": "PubSub", "value": "发布/订阅模式"},
+                {"type": "State", "value": "状态模式"},
+                {"type": "Strategy", "value": "策略模式"},
+                {"type": "TemplateMethod", "value": "模板方法模式"},
+                {"type": "Visitor", "value": "访问者模式"}
+            ]
+        }
+    ]
+}
