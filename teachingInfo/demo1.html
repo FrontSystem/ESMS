@@ -13,7 +13,7 @@
 <body>
   <div id="teachingInformation" class="easyui-layout">
     <div id="header" data-options="region:'north'">
-      <p><!-- <img class="logo" src="i/rdlogo.png"/> --><span>教学信息管理系统<i>(测试)</i></span></p>
+      <p><img class="logo" src="i/rdlogo.png"/><span>教学信息管理系统<i>(测试)</i></span></p>
     </div>
     <div id="nav" data-options="region:'west'" title="阶段">
       <ul  class="easyui-tree">
@@ -23,8 +23,7 @@
       </ul>
     </div>
     <div id="content" data-options="region:'center'">
-      <table id="teachingInformationList" class="easyui-datagrid" style="width:100%;height:580px" url="json/listOne.json,  
-        method:'get'" title="教学信息表" iconCls="icon-save">
+      <table id="teachingInformationList" class="easyui-datagrid" style="width:100%;height:580px"  title="教学信息表" iconCls="icon-save">
         <thead frozen="true">
            <tr><th field="className" width="60">班号/姓名</th></tr>
         </thead>

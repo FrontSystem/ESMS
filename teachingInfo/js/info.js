@@ -10,3 +10,9 @@ function formatPrice(val,row){
 	// 	return val;
 	// }
 }
+$(function(){
+	$('#teachingInformationList').datagrid({
+	  url:'json/listOne.json',
+	  method:'GET'
+	});
+});
