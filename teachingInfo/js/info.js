@@ -2,17 +2,23 @@ function showcontent(language){
 	// $('#content').html(language);
 }
 
-function formatPrice(val,row){
-	console.log("val",val);
-	// if (val < 30){
-	// 	return '<span style="color:red;">('+val+')</span>';
-	// } else {
-	// 	return val;
-	// }
+//实际升学率
+function formatActualEnrollmentRate(val,row){
+	if (val>=0.6){
+		return '<span style="color:red;">'+val+'</span>';
+	} else {
+		return val;
+	}
 }
+function doSearch(value, name){
+	alert("检索"+name+"条目下的"+value);
+}
+
 $(function(){
 	$('#teachingInformationList').datagrid({
 	  url:'json/listOne.json',
-	  method:'GET'
+	  method:'GET',
+	  toolbar:"#myToolbar",
+	  striped:true
 	});
 });
