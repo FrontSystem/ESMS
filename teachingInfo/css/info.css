@@ -88,3 +88,42 @@ body {
 .lines-bottom .datagrid-body td{
   border-right:1px dotted transparent;
 }
+
+
+#studentBox table input{
+   font-size: 12px;
+   height:18px;
+}
+#studentBox label{
+   width:60px;
+   font-size: 14px;
+   display: inline-block;
+}
+#studentBox tr{
+   padding:10px 0;
+   margin:10px 0;
+}
+#studentBox td.student{
+   width:130px;
+}
+#studentBox td.student input{
+   width:60px;
+}
+#studentBox td.information{
+   width:270px;
+}
+#studentBox td.information input{
+   width:200px;
+}
+#classBox table input{
+   font-size: 12px;
+}
+#classBox label{
+   width:100px;
+   font-size: 14px;
+   display: inline-block;
+   text-align:right;
+}
+#dialog-buttons{
+    text-align: center;
+}

@@ -23,20 +23,6 @@
       </ul>
     </div>
     <div id="content" data-options="region:'center'">
-      <div id="myToolbar">
-          <a href="#" id="inportExecl" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-ok'">导入execl</a>
-          <a href="#" id="exportExecl" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'">导出execl</a>
-          <a href="#" id="addClass" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">添加班级</a>
-          <a href="#" id="editExecl" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'">编辑班级</a>
-          <a href="#" id="removeClass" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'">删除班级</a>
-          <input class="easyui-searchbox" data-options="prompt:'请输入要搜索的数据',menu:'#scope',searcher:doSearch" style="width:200px;height:24px;"/>
-          <div id="scope">
-            <div data-options="name:'unlimited'">不限</div>
-            <div data-options="name:'student'">学生</div>
-            <div data-options="name:'teacher'">教师</div>
-            <div data-options="name:'supervisor'">督导</div>
-          </div>
-      </div>
       <table id="teachingInformationList" class="easyui-datagrid" style="width:100%;height:630px"  title="教学信息表" iconCls="icon-save">
         <thead frozen="true">
            <tr><th data-options="field:'className',sortable:true" width="60">班号/姓名</th></tr>
@@ -83,6 +69,137 @@
           </tr>
         </thead>
       </table>
+      <div id="myToolbar">
+          <a href="#" id="importExecl" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-ok'">导入execl</a>
+          <a href="#" id="exportExecl" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'">导出execl</a>
+          <a href="#" id="addClass" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'"  onclick="addClass()">添加班级</a>
+          <a href="#" id="editClass" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'" onclick="editClass()">编辑班级</a>
+          <a href="#" id="deleteClass" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'" onclick="deleteClass()">删除班级</a>
+          <input class="easyui-searchbox" data-options="prompt:'请输入要搜索的数据',menu:'#scope',searcher:doSearch" style="width:200px;height:24px;"/>
+          <div id="scope">
+            <div data-options="name:'unlimited'">不限</div>
+            <div data-options="name:'student'">学生</div>
+            <div data-options="name:'teacher'">教师</div>
+            <div data-options="name:'supervisor'">督导</div>
+          </div>
+      </div>
+      <div id="dialog" class="easyui-dialog" title="编辑框" buttons="#dialog-buttons" closed="true" style="width:580px;height:480px;">
+        <form id="dialogForm" method="post">
+          <div class="easyui-tabs" style="width:100%;height:400px;">
+            <div title="学生">
+               <table id="studentBox" style="width:420px;margin:0 auto">
+                  <tbody>
+                    <tr>
+                       <td class="student"><label>姓名1：</label><input name="st1"/></td>
+                       <td class="information"><label>信息1：</label><input name="info1"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名2：</label><input name="st2"/></td>
+                       <td class="information"><label>信息2：</label><input name="info2"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名3：</label><input name="st3"/></td>
+                       <td class="information"><label>信息3：</label><input name="info3"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名4：</label><input name="st4"/></td>
+                       <td class="information"><label>信息4：</label><input name="info4"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名5：</label><input name="st5"/></td>
+                       <td class="information"><label>信息5：</label><input name="info5"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名6：</label><input name="st6"/></td>
+                       <td class="information"><label>信息6：</label><input name="info6"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名7：</label><input name="st7"/></td>
+                       <td class="information"><label>信息7：</label><input name="info7"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名8：</label><input name="st8"/></td>
+                       <td class="information"><label>信息8：</label><input name="info8"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名9：</label><input name="st9"/></td>
+                       <td class="information"><label>信息9：</label><input name="info9"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名10：</label><input name="st10"/></td>
+                       <td class="information"><label>信息10：</label><input name="info10"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名11：</label><input name="st11"/></td>
+                       <td class="information"><label>信息11：</label><input name="info11"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名12：</label><input name="st12"/></td>
+                       <td class="information"><label>信息12：</label><input name="info12"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名13：</label><input name="st13"/></td>
+                       <td class="information"><label>信息13：</label><input name="info13"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名14：</label><input name="st14"/></td>
+                       <td class="information"><label>信息14：</label><input name="info14"/></td>
+                    </tr>
+                  </tbody>
+               </table>
+            </div>
+            <div title="班级">
+               <table id="classBox">
+                  <tbody>
+                    <tr>
+                       <td><label>班级基数：</label><input name="base"/></td>
+                       <td><label>在读人数：</label><input name="studying"/></td>
+                    </tr>
+                    <tr>
+                       <td><label>实际升学人数：</label><input name="actualEnrollment"/></td>
+                       <td><label>实际升学率：</label><input name="actualEnrollmentRate"/></td>
+                    </tr>
+                    <tr>
+                       <td><label>预计升学人数：</label><input name="expectEnrollment"/></td>
+                       <td><label>预计升学率：</label><input name="expectEnrollmentRate"/></td>
+                    </tr>
+                    <tr>
+                       <td><label>可能升学人员：</label><input name="execptEnrollmentStutents"/></td>
+                       <td><label>班型：</label><input name="classType"/></td>
+                    </tr>
+                    <tr>
+                       <td><label>教师：</label><input name="teacher"/></td>
+                       <td><label>督导：</label><input name="supervisor"/></td>
+                    <tr>
+                       <td><label>教室：</label><input name="classRoom"/></td>
+                       <td><label>上课时间：</label><input name="classTime" value="2017年11月26号"/></td>
+                    </tr>
+                    </tr>
+                    <tr>
+                       <td><label>课时数：</label><input name="totalHour"/></td>
+                       <td><label>剩余课时：</label><input name="remianHour"/></td> 
+                    </tr>
+                    <tr>
+                       <td><label>教学进度：</label><input name="progress" value="五步流程处理流程"/></td>
+                       <td><label>开班时间：</label><input name="startTime"/></td>
+                    </tr>
+                    <tr>
+                       <td><label>计划结课时间：</label><input name="planEndTime"/></td>
+                       <td><label>实际结课时间：</label><input name="actualEndTime"/></td>
+                    </tr>
+                    <tr>
+                       <td><label>展示课1：</label><input name="exhibitionClass1"/></td>
+                       <td><label>展示课2：</label><input name="exhibitionClass2"/></td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="dialog-buttons">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveClass()">保存</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dialog').dialog('close')">取消</a>
+        </div>
+      </form>
     </div>
     <div id="footer" data-options="region:'south'">
       <p>

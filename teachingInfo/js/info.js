@@ -10,9 +10,36 @@ function formatActualEnrollmentRate(val,row){
 		return val;
 	}
 }
+//搜索
 function doSearch(value, name){
 	alert("检索"+name+"条目下的"+value);
 }
+//添加班级
+function addClass(){
+   $("#dialog").dialog("open").dialog("setTitle", "添加新的班级");
+   $("#dialogForm").form("clear");
+   //url="";
+}
+//编辑班级
+function editClass(){
+   var row=$("#teachingInformationList").datagrid("getSelected");
+   if(row){
+   	  $("#dialog").dialog("open").dialog("setTitle", "编辑班级");
+      $("#dialogForm").form("clear");
+      $("#dialogForm").form("load",row);
+   }else{
+   	  alert("请先选择一个班级！");
+   }
+	
+}
+//删除班级
+function deleteClass(){
+
+	
+}
+
+
+
 
 $(function(){
 	$('#teachingInformationList').datagrid({
@@ -20,16 +47,17 @@ $(function(){
 	  method:'GET',
 	  toolbar:"#myToolbar",
 	  striped:true,
-		onHeaderContextMenu: function(e, field){
-			e.preventDefault();
-			if (!cmenu){
-				createColumnMenu();
-			}
-			cmenu.menu('show', {
-				left:e.pageX,
-				top:e.pageY
-			});
+	  singleSelect:true,
+	  onHeaderContextMenu: function(e, field){
+		e.preventDefault();
+		if (!cmenu){
+			createColumnMenu();
 		}
+		cmenu.menu('show', {
+			left:e.pageX,
+			top:e.pageY
+		});
+	  }
 	});
 	var cmenu;
 	function createColumnMenu(){
