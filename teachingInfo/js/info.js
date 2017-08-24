@@ -1,3 +1,5 @@
+var listData=[];//表格所有数据
+
 function showcontent(language){
 	// $('#content').html(language);
 }
@@ -24,20 +26,37 @@ function addClass(){
 function editClass(){
    var row=$("#teachingInformationList").datagrid("getSelected");
    if(row){
+   	  // 获取选中行的Index的值  
+	  var rowIndex=$("#teachingInformationList").datagrid('getRowIndex', row);
+	  // console.log("选中的行数", rowIndex);
    	  $("#dialog").dialog("open").dialog("setTitle", "编辑班级");
       $("#dialogForm").form("clear");
       $("#dialogForm").form("load",row);
    }else{
    	  alert("请先选择一个班级！");
    }
-	
 }
 //删除班级
 function deleteClass(){
+	var row=$("#teachingInformationList").datagrid("getSelected");
+    if(row){
+   	  // 获取选中行的Index的值  
+	   var rowIndex=$("#teachingInformationList").datagrid('getRowIndex', row);
+	   listData.splice(rowIndex, 1);
+	   //重新加载本地数据
+	   $('#teachingInformationList').datagrid("loadData", listData);
+   }else{
+   	  alert("请先选择一个班级！");
+   }
+}
+//重做
+function redo(){
 
+}
+//取消
+function undo(){
 	
 }
-
 
 
 
@@ -48,6 +67,17 @@ $(function(){
 	  toolbar:"#myToolbar",
 	  striped:true,
 	  singleSelect:true,
+	  //加载成功之后，选定并获取首行数据       
+      onLoadSuccess:function(data){
+            listData=data.rows;//表格所有数据
+            // var rows=$('test').datagrid("getRows");
+            // if (rows.length > 0) {
+            //     $('test').datagrid('selectRow',0);//grid加载完成后自动选中第一行
+            //     var row=$('test').datagrid("getSelections");//获取选中的数据
+            // }else {
+            //     alert("没有数据");
+            // }
+      },  
 	  onHeaderContextMenu: function(e, field){
 		e.preventDefault();
 		if (!cmenu){

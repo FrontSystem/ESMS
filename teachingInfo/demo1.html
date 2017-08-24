@@ -75,6 +75,8 @@
           <a href="#" id="addClass" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'"  onclick="addClass()">添加班级</a>
           <a href="#" id="editClass" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'" onclick="editClass()">编辑班级</a>
           <a href="#" id="deleteClass" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'" onclick="deleteClass()">删除班级</a>
+          <a href="#" id="undo" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-undo'" onclick="undo()">取消</a>
+          <a href="#" id="redo" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-redo'" onclick="redo()">重做</a>
           <input class="easyui-searchbox" data-options="prompt:'请输入要搜索的数据',menu:'#scope',searcher:doSearch" style="width:200px;height:24px;"/>
           <div id="scope">
             <div data-options="name:'unlimited'">不限</div>
@@ -151,6 +153,9 @@
             <div title="班级">
                <table id="classBox">
                   <tbody>
+                   <tr>
+                       <td><label>班号/姓名：</label><input name="className"/></td>
+                    </tr>
                     <tr>
                        <td><label>班级基数：</label><input name="base"/></td>
                        <td><label>在读人数：</label><input name="studying"/></td>
