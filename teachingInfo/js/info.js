@@ -1,4 +1,7 @@
 var listData=[];//表格所有数据
+var listDataHistory=[];//历史数据
+var historyIndex=-1;
+var saveCommand={type:""};//保存命令
 
 function showcontent(language){
 	// $('#content').html(language);
@@ -12,6 +15,10 @@ function formatActualEnrollmentRate(val,row){
 		return val;
 	}
 }
+//上传文件
+// function importExecl(){
+	
+// }
 //搜索
 function doSearch(value, name){
 	alert("检索"+name+"条目下的"+value);
@@ -20,6 +27,9 @@ function doSearch(value, name){
 function addClass(){
    $("#dialog").dialog("open").dialog("setTitle", "添加新的班级");
    $("#dialogForm").form("clear");
+   saveCommand={//保存命令
+      	type:"add"
+   };
    //url="";
 }
 //编辑班级
@@ -32,6 +42,9 @@ function editClass(){
    	  $("#dialog").dialog("open").dialog("setTitle", "编辑班级");
       $("#dialogForm").form("clear");
       $("#dialogForm").form("load",row);
+      saveCommand={//保存命令
+      	  type:"edit"
+      };
    }else{
    	  alert("请先选择一个班级！");
    }
@@ -43,21 +56,95 @@ function deleteClass(){
    	  // 获取选中行的Index的值  
 	   var rowIndex=$("#teachingInformationList").datagrid('getRowIndex', row);
 	   listData.splice(rowIndex, 1);
-	   //重新加载本地数据
-	   $('#teachingInformationList').datagrid("loadData", listData);
+	   $('#teachingInformationList').datagrid("loadData", listData);//重新加载本地数据
    }else{
    	  alert("请先选择一个班级！");
    }
 }
 //重做
 function redo(){
-
+	// console.log("historyIndex",historyIndex,",listDataHistory.length",listDataHistory.length-1);
+	// var listDataHistoryLength=listDataHistory.length-1;
+	// if(historyIndex==-1&&listDataHistory.length==0){
+ //       alert("没有了");
+	// }else if(historyIndex==0){
+ //       $('#teachingInformationList').datagrid("loadData", listDataHistory[historyIndex]);//重新加载本地数据
+ //       historyIndex++;
+	// }else if(historyIndex==listDataHistory.length-1){
+ //       $('#teachingInformationList').datagrid("loadData", listDataHistory[historyIndex]);//重新加载本地数据
+ //       historyIndex++;
+	// }else if(historyIndex<listDataHistory.length-1){
+ //       $('#teachingInformationList').datagrid("loadData", listDataHistory[historyIndex]);//重新加载本地数据  
+ //       historyIndex++;
+	// }else{
+	// 	alert("没有了");
+	// }
 }
 //取消
 function undo(){
-	
+	var listDataHistoryLength=listDataHistory.length-1;
+	console.log("historyIndex",historyIndex,",listDataHistoryLength",listDataHistoryLength);
+	if(historyIndex==-1&&listDataHistory.length==0){
+       alert("没有了");
+	}else if(historyIndex>=0){
+       $('#teachingInformationList').datagrid("loadData", listDataHistory[historyIndex]);//重新加载本地数据
+       historyIndex--;
+	}else{
+		alert("没有了");
+	}
+}
+function saveClass(){
+	var arr=[];
+	$.extend(true, arr, listData);
+	listDataHistory.push(arr);
+    historyIndex=listDataHistory.length-1;
+	var array=$("#dialogForm").serializeArray();
+	var obj={};
+	for(var i=0;i<array.length;i++){
+		obj[array[i]["name"]]=array[i]["value"];
+    }
+   var row=$("#teachingInformationList").datagrid("getSelected");
+   if(row&&saveCommand.type=="edit"){
+	  var rowIndex=$("#teachingInformationList").datagrid('getRowIndex', row);// 获取选中行的Index的值
+	  listData[rowIndex]=obj;
+   }if(row&&saveCommand.type=="add"){
+	  var rowIndex=$("#teachingInformationList").datagrid('getRowIndex', row);// 获取选中行的Index的值
+	  listData.splice(rowIndex+1,0,obj);
+   }else{
+      listData.splice(listData.length,0,obj);
+   }
+   $('#teachingInformationList').datagrid("loadData", listData);//重新加载本地数据
+   $("#dialog").dialog("close");
 }
 
+
+function myformatter(date){
+   var y=date.getFullYear();
+   var m=date.getMonth()+1;
+   var d=date.getDate();
+   return y+'-'+(m<10 ? ('0'+m) : m)+'-'+(d<10 ? ('0'+d) : d);
+}
+function myparser(s){
+	if (!s) return new Date();
+	if(s.toString().indexOf("周")>-1){
+		return new Date();
+	}
+	if(!isNaN(s)){//是数字
+       return new Date(1900,0,Number(s));
+	}
+	if(s.toString().indexOf("-")==-1){
+		return new Date();
+	}
+	var ss = (s.split('-'));
+	var y = parseInt(ss[0],10);
+	var m = parseInt(ss[1],10);
+	var d = parseInt(ss[2],10);
+	if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+		return new Date(y,m-1,d);
+	} else {
+		return new Date();
+	}
+}
 
 
 $(function(){
@@ -125,4 +212,5 @@ $(function(){
 			});
 		}
 	}
+
 });

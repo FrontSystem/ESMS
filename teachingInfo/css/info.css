@@ -110,10 +110,10 @@ body {
    width:60px;
 }
 #studentBox td.information{
-   width:270px;
+   width:300px;
 }
 #studentBox td.information input{
-   width:200px;
+   width:230px;
 }
 #classBox table input{
    font-size: 12px;
