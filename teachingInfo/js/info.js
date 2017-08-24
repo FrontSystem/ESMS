@@ -53,6 +53,10 @@ function editClass(){
 function deleteClass(){
 	var row=$("#teachingInformationList").datagrid("getSelected");
     if(row){
+        var arr=[];
+		$.extend(true, arr, listData);
+		listDataHistory.push(arr);
+	    historyIndex=listDataHistory.length-1;
    	  // 获取选中行的Index的值  
 	   var rowIndex=$("#teachingInformationList").datagrid('getRowIndex', row);
 	   listData.splice(rowIndex, 1);
