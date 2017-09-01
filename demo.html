@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>教学信息管理系统</title>
+  <link rel="stylesheet" type="text/css" href="EasyUI/themes/default/easyui.css">
+  <link rel="stylesheet" type="text/css" href="EasyUI/themes/icon.css">
+  <link rel="stylesheet" type="text/css" href="css/info.css">
+  <script type="text/javascript" src="EasyUI/jquery.min.js"></script>
+  <script type="text/javascript" src="EasyUI/jquery.easyui.min.js"></script>
+  <script type="text/javascript" src="js/info.js"></script>
+</head>
+<body>
+  <div id="teachingInformation" class="easyui-layout">
+    <div id="header" data-options="region:'north'">
+      <p><img class="logo" src="i/rdlogo.png"/><span>Cammie(蒋民)教学信息管理<i>(测试)</i></span></p>
+    </div>
+    <div id="nav" data-options="region:'west'" title="阶段">
+      <ul class="easyui-tree">
+        <li><a href="javascript:void(0)" onclick="showcontent('one')">一阶</a></li>
+        <li><a href="javascript:void(0)" onclick="showcontent('two')">二阶</a></li>
+        <li><a href="javascript:void(0)" onclick="showcontent('three')">三阶</a></li>
+      </ul>
+    </div>
+    <div id="content" data-options="region:'center'">
+      <table id="teachingInformationList" class="easyui-datagrid" style="width:100%;height:630px"  title="教学信息表" iconCls="icon-save">
+        <thead frozen="true">
+           <tr><th data-options="field:'className',sortable:true" width="60">班号/姓名</th></tr>
+        </thead>
+        <thead>
+          <tr>
+            <th colspan="14">学生</th>
+            <th data-options="field:'base',sortable:true" width="55" rowspan="2">班级基数</th>
+            <th data-options="field:'studying',sortable:true" width="55" rowspan="2">在读人数</th>
+            <th data-options="field:'actualEnrollment',sortable:true" width="80" rowspan="2">实际升学人数</th>
+            <th data-options="field:'actualEnrollmentRate',sortable:true,formatter:formatActualEnrollmentRate" width="80" rowspan="2">实际升学率</th>
+            <th data-options="field:'expectEnrollment',sortable:true" width="80" rowspan="2">预计升学人数</th>
+            <th data-options="field:'expectEnrollmentRate',sortable:true" width="70" rowspan="2">预计升学率</th>
+            <th data-options="field:'execptEnrollmentStutents',sortable:true" width="80" rowspan="2">可能升学人员</th>
+            <th data-options="field:'classType',sortable:true" width="30" rowspan="2">班型</th>
+            <th data-options="field:'teacher',sortable:true" width="50" rowspan="2">教师</th>
+            <th data-options="field:'supervisor',sortable:true" width="50" rowspan="2">督导</th>
+            <th data-options="field:'classRoom',sortable:true" width="30" rowspan="2">教室</th>
+            <th data-options="field:'classTime',sortable:true" width="110" rowspan="2">上课时间</th>
+            <th data-options="field:'totalHour',sortable:true" width="50" rowspan="2">课时数</th>
+            <th data-options="field:'remianHour',sortable:true" width="55" rowspan="2">剩余课时</th>
+            <th data-options="field:'progress',sortable:true" width="55" rowspan="2">教学进度</th>
+            <th data-options="field:'startTime',sortable:true" width="80" rowspan="2">开班时间</th>
+            <th data-options="field:'planEndTime',sortable:true" width="80" rowspan="2">计划结课时间</th>
+            <th data-options="field:'actualEndTime',sortable:true" width="80" rowspan="2">实际结课时间</th>
+            <th data-options="field:'exhibitionClass1',sortable:true" width="80" rowspan="2">展示课1</th>
+            <th data-options="field:'exhibitionClass2',sortable:true" width="80" rowspan="2">展示课2</th>
+          </tr>
+          <tr>
+            <th data-options="field:'st1'" width="50">1</th>
+            <th data-options="field:'st2'" width="50">2</th>
+            <th data-options="field:'st3'" width="50">3</th>
+            <th data-options="field:'st4'" width="50">4</th>
+            <th data-options="field:'st5'" width="50">5</th>
+            <th data-options="field:'st6'" width="50">6</th>
+            <th data-options="field:'st7'" width="50">7</th>
+            <th data-options="field:'st8'" width="50">8</th>
+            <th data-options="field:'st9'" width="50">9</th>
+            <th data-options="field:'st10'" width="50">10</th>
+            <th data-options="field:'st11'" width="50">11</th>
+            <th data-options="field:'st12'" width="50">12</th>
+            <th data-options="field:'st13'" width="50">13</th>
+            <th data-options="field:'st14'" width="50">14</th>
+          </tr>
+        </thead>
+      </table>
+      <div id="myToolbar">
+          <a href="#"  class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'"  onclick="importExecl()">导入</a>
+          <a href="#" id="exportExecl" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save',disabled:true">导出</a>
+          <a href="#" id="addClass" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'"  onclick="addClass()">添加班级</a>
+          <a href="#" id="editClass" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'" onclick="editClass()">编辑班级</a>
+          <a href="#" id="deleteClass" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'" onclick="deleteClass()">删除班级</a>
+          <a href="#" id="undo" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-undo'" onclick="undo()">取消</a>
+          <a href="#" id="redo" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-redo',disabled:true" onclick="redo()">重做</a>
+          <input class="easyui-searchbox" data-options="prompt:'请输入要搜索的数据',menu:'#scope',searcher:doSearch,disabled:true" style="width:200px;height:24px;"/>
+          <div id="scope">
+            <div data-options="name:'unlimited'">不限</div>
+            <div data-options="name:'student'">学生</div>
+            <div data-options="name:'teacher'">教师</div>
+            <div data-options="name:'supervisor'">督导</div>
+          </div>
+      </div>
+      <div id="fileDialog" class="easyui-dialog" title="编辑框" buttons="#dialog-buttons" closed="true" style="width:260px;height:163px;">
+         <form id="fileForm" method="post" enctype="multipart/form-data" action="/file_upload">
+            <p style="text-align:center;">
+              <input id="fileName" class="easyui-textbox" data-options="prompt:'选择execl表格...'" style="width:150px;height:25px">
+              <a href="javascript:;" class="file">选择文件
+                 <input id="file" type="file" name="file" size="50"/>
+              </a>
+            </p>
+            <p style="text-align:center;">
+              <a href="javascript:;" id="importExecl" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">上传</a>
+              <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#fileDialog').dialog('close')">取消</a>
+            </p>
+          </form>
+      </div>
+      <div id="dialog" class="easyui-dialog" title="编辑框" buttons="#dialog-buttons" closed="true" style="width:580px;height:494px;">
+        <form id="dialogForm" method="post">
+          <div class="easyui-tabs" style="width:100%;height:420px;">
+            <div title="学生">
+               <table id="studentBox" style="width:450px;margin:0 auto">
+                  <tbody>
+                    <tr>
+                       <td class="student"><label>姓名1：</label><input name="st1" class="easyui-textbox"/></td>
+                       <td class="information"><label>信息1：</label><input name="info1" class="easyui-textbox" data-options="iconCls:'icon-clear'"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名2：</label><input name="st2" class="easyui-textbox"/></td>
+                       <td class="information"><label>信息2：</label><input name="info2" class="easyui-textbox" data-options="iconCls:'icon-clear'"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名3：</label><input name="st3" class="easyui-textbox"/></td>
+                       <td class="information"><label>信息3：</label><input name="info3" class="easyui-textbox" data-options="iconCls:'icon-clear'"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名4：</label><input name="st4" class="easyui-textbox"/></td>
+                       <td class="information"><label>信息4：</label><input name="info4" class="easyui-textbox" data-options="iconCls:'icon-clear'"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名5：</label><input name="st5" class="easyui-textbox"/></td>
+                       <td class="information"><label>信息5：</label><input name="info5" class="easyui-textbox" data-options="iconCls:'icon-clear'"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名6：</label><input name="st6" class="easyui-textbox"/></td>
+                       <td class="information"><label>信息6：</label><input name="info6" class="easyui-textbox" data-options="iconCls:'icon-clear'"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名7：</label><input name="st7" class="easyui-textbox"/></td>
+                       <td class="information"><label>信息7：</label><input name="info7" class="easyui-textbox" data-options="iconCls:'icon-clear'"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名8：</label><input name="st8" class="easyui-textbox"/></td>
+                       <td class="information"><label>信息8：</label><input name="info8" class="easyui-textbox" data-options="iconCls:'icon-clear'"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名9：</label><input name="st9" class="easyui-textbox"/></td>
+                       <td class="information"><label>信息9：</label><input name="info9" class="easyui-textbox" data-options="iconCls:'icon-clear'"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名10：</label><input name="st10" class="easyui-textbox"/></td>
+                       <td class="information"><label>信息10：</label><input name="info10" class="easyui-textbox" data-options="iconCls:'icon-clear'"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名11：</label><input name="st11" class="easyui-textbox"/></td>
+                       <td class="information"><label>信息11：</label><input name="info11" class="easyui-textbox" data-options="iconCls:'icon-clear'"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名12：</label><input name="st12" class="easyui-textbox"/></td>
+                       <td class="information"><label>信息12：</label><input name="info12" class="easyui-textbox" data-options="iconCls:'icon-clear'"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名13：</label><input name="st13" class="easyui-textbox"/></td>
+                       <td class="information"><label>信息13：</label><input name="info13" class="easyui-textbox" data-options="iconCls:'icon-clear'"/></td>
+                    </tr>
+                    <tr>
+                       <td class="student"><label>姓名14：</label><input name="st14" class="easyui-textbox"/></td>
+                       <td class="information"><label>信息14：</label><input name="info14" class="easyui-textbox" data-options="iconCls:'icon-clear'"/></td>
+                    </tr>
+                  </tbody>
+               </table>
+            </div>
+            <div title="班级">
+               <table id="classBox">
+                  <tbody>
+                   <tr>
+                       <td><label>班号/姓名：</label><input name="className" class="easyui-textbox" /></td>
+                    </tr>
+                    <tr>
+                       <td><label>班级基数：</label><input name="base" class="easyui-numberspinner"/></td>
+                       <td><label>在读人数：</label><input name="studying" class="easyui-numberspinner"/></td>
+                    </tr>
+                    <tr>
+                       <td><label>实际升学人数：</label><input name="actualEnrollment"  class="easyui-numberspinner"/></td>
+                       <td><label>实际升学率：</label><input name="actualEnrollmentRate" class="easyui-textbox" /></td>
+                    </tr>
+                    <tr>
+                       <td><label>预计升学人数：</label><input name="expectEnrollment" class="easyui-numberspinner"/></td>
+                       <td><label>预计升学率：</label><input name="expectEnrollmentRate" class="easyui-textbox" /></td>
+                    </tr>
+                    <tr>
+                       <td><label>可能升学人员：</label><input name="execptEnrollmentStutents" class="easyui-textbox" /></td>
+                       <td><label>班型：</label><input name="classType" class="easyui-textbox" /></td>
+                    </tr>
+                    <tr>
+                       <td><label>教师：</label><input name="teacher" class="easyui-textbox" /></td>
+                       <td><label>督导：</label><input name="supervisor" class="easyui-textbox" /></td>
+                    <tr>
+                       <td><label>教室：</label><input name="classRoom" class="easyui-textbox" /></td>
+                       <td><label>上课时间：</label><input name="classTime" class="easyui-datebox" data-options="sharedCalendar:'#calendar',formatter:myformatter,parser:myparser" value="2017年11月26号"/></td>
+                    </tr>
+                    </tr>
+                    <tr>
+                       <td><label>课时数：</label><input name="totalHour" class="easyui-numberspinner"/></td>
+                       <td><label>剩余课时：</label><input name="remianHour" class="easyui-numberspinner"/></td> 
+                    </tr>
+                    <tr>
+                       <td><label>教学进度：</label><input name="progress" value="五步流程处理流程" class="easyui-textbox" /></td>
+                       <td><label>开班时间：</label><input name="startTime" class="easyui-datebox" data-options="sharedCalendar:'#calendar',formatter:myformatter,parser:myparser" /></td>
+                    </tr>
+                    <tr>
+                       <td><label>计划结课时间：</label><input name="planEndTime" class="easyui-datebox" data-options="sharedCalendar:'#calendar',formatter:myformatter,parser:myparser" /></td>
+                       <td><label>实际结课时间：</label><input name="actualEndTime" class="easyui-datebox" data-options="sharedCalendar:'#calendar',formatter:myformatter,parser:myparser" /></td>
+                    </tr>
+                    <tr>
+                       <td><label>展示课1：</label><input name="exhibitionClass1" class="easyui-datebox" data-options="sharedCalendar:'#calendar',formatter:myformatter,parser:myparser" /></td>
+                       <td><label>展示课2：</label><input name="exhibitionClass2" class="easyui-datebox" data-options="sharedCalendar:'#calendar',formatter:myformatter,parser:myparser" /></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="calendar" class="easyui-calendar" style="width:250px;height:250px;"></div>
+          </div>
+        </div>
+        <div id="dialog-buttons">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveClass()">保存</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dialog').dialog('close')">取消</a>
+        </div>
+      </form>
+    </div>
+    </div>
+    <div id="footer" data-options="region:'south'">
+      <p>
+         <span>版权所有：<a>Cammie(蒋民)</a></span>
+         <span>技术支持：<a>FrontSystem</a></span>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

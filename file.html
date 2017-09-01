@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>文件上传表单</title>
+<script type="text/javascript" src="javascripts/jquery-1.9.1.js"></script>
+</head>
+<body>
+<h3>文件上传：</h3>
+选择一个文件上传: <br />
+<form id="fileForm" action="/file_upload" method="post" enctype="multipart/form-data">
+	<input id="file" type="file" name="image" size="50" /><br />
+	<input id="importExecl" type="submit" value="上传文件" />
+</form>
+<script>
+// $(function(){
+// 	$('#importExecl').on('click',function(e){
+// 	    e.preventDefault();	   
+// 		// var file = $('#file').filebox('getValue');
+// 		// if(file.length == 0){
+// 		// 	alert('请选择要上传的文件');	
+// 		// 	return false;
+// 		// }
+// 	 //   var extName = file.substring(file.lastIndexOf('.'),file.length).toLowerCase();
+// 		// if(extName != '.png' && extName != '.jpg'){
+// 		//    alert('只支持png和jpg格式图片');							 
+// 		//    return false;				
+// 		// }
+// 		$.ajax({
+//                 cache: true,
+//                 type: "POST",
+//                 url:"http://127.0.0.1:3000/file_upload",
+//                 data:$('#file').val(),// 你的formid
+//                 async: false,
+//                 error: function(request) {
+//                     alert("Connection error");
+//                 },
+//                 success: function(data) {
+//                     alert(data);
+//                 }
+//             });
+// 		return true;				
+// 	});
+// });
+</script> 
+</body>
+</html>
